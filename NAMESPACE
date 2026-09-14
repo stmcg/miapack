@@ -3,5 +3,6 @@
 S3method(print,mia)
 S3method(print,mia_ci)
 export(get_CI)
+export(mia_aipw)
 export(mia_ice)
 export(mia_nice)

@@ -28,5 +28,6 @@ print(res)
 
 }
 \seealso{
-\code{\link{mia_nice}}, \code{\link{mia_ice}}
+\code{\link{mia_nice}}, \code{\link{mia_ice}},
+\code{\link{mia_aipw}}
 }

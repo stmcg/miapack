@@ -1,7 +1,7 @@
 Package: miapack
 Type: Package
 Title: Marginalization over Incomplete Auxiliaries
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(person("Sean", "McGrath", 
              role = c("aut", "cre"),
              email = "sean.mcgrath514@gmail.com", 
@@ -27,8 +27,9 @@ Description: Implements methods to estimate conditional outcome means in
     settings with missingness-not-at-random and incomplete auxiliary variables. 
     Specifically, this package implements the marginalization over incomplete
     auxiliaries (MIA) method proposed by Mathur et al. (2026) <doi:10.13140/RG.2.2.30750.19524>. 
-    The package supports the iterative conditional expectation estimator and
-    the noniterative conditional expectation estimator.
+    The package supports an iterative conditional expectation estimator, 
+    noniterative conditional expectation estimator, and augmented inverse  
+    probability weighted estimator.
 License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
@@ -39,5 +40,6 @@ Imports: boot, nnet, progress
 Depends: 
     R (>= 2.10)
 Suggests: 
+    SuperLearner,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

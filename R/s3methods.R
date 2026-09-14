@@ -6,7 +6,8 @@
 #' @param digits Integer specifying the number of decimal places to display.
 #' @param ... Other arguments (ignored).
 #' @return No value is returned.
-#' @seealso \code{\link{mia_nice}}, \code{\link{mia_ice}}
+#' @seealso \code{\link{mia_nice}}, \code{\link{mia_ice}},
+#' \code{\link{mia_aipw}}
 #'
 #' @examples
 #' res <- mia_nice(data = dat.sim,
@@ -27,12 +28,14 @@ print.mia <- function(x, digits = 4, ...){
   cat("Setting:\n")
   method_label <- if (!is.null(x$method) && x$method == 'ice'){
     'Iterative conditional expectation (ICE)'
+  } else if (!is.null(x$method) && x$method == 'aipw'){
+    'Augmented inverse probability weighting (AIPW)'
   } else {
     'Noniterative conditional expectation (NICE)'
   }
   cat(sprintf("  %-28s %s\n", "Method:", method_label))
   cat(sprintf("  %-28s %s\n", "Outcome variable type:", x$Y_type))
-  if (is.null(x$method) || x$method != 'ice'){
+  if (is.null(x$method) || x$method == 'nice'){
     W_info_components <- paste0(x$W_type, " (", x$W_names, ")")
     W_info <- paste(W_info_components, collapse = ", ")
     cat(sprintf("  %-28s %s\n", "Auxiliary variable(s) type:", W_info))
@@ -40,13 +43,21 @@ print.mia <- function(x, digits = 4, ...){
 
 
   cat("\nResults:\n")
-  X_temp <- paste(paste0(x$X_names, "=", x$X_values_1), collapse = ", ")
+  if (length(x$X_names) == 0){
+    X_temp <- "(marginal)"
+  } else {
+    X_temp <- paste(paste0(x$X_names, "=", x$X_values_1), collapse = ", ")
+  }
   cat(sprintf("  %-28s %s\n", "Predictor values:", X_temp))
   cat(sprintf("  %-28s %s\n", "Mean estimate:",
               formatC(x$mean_est_1, digits = digits, format = "f")))
 
   if (!is.null(x$X_values_2)){
-    X_temp_2 <- paste(paste0(x$X_names, "=", x$X_values_2), collapse = ", ")
+    if (length(x$X_names) == 0){
+      X_temp_2 <- "(marginal)"
+    } else {
+      X_temp_2 <- paste(paste0(x$X_names, "=", x$X_values_2), collapse = ", ")
+    }
     cat(sprintf("\n  %-28s %s\n", "Predictor values:", X_temp_2))
     cat(sprintf("  %-28s %s\n", "Mean estimate:",
                 formatC(x$mean_est_2, digits = digits, format = "f")))

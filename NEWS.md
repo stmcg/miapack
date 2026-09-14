@@ -1,3 +1,7 @@
+# miapack 0.3.0 (TBD)
+
+* Added the `mia_aipw` function which implements an augmented inverse probability weighted (AIPW) type estimator
+
 # miapack 0.2.0 (2026-08-20)
 
 * Renamed the `mia` function to `mia_nice`

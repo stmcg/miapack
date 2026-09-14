@@ -37,6 +37,10 @@
 #'
 get_CI <- function(mia_res, n_boot = 1000, type = 'perc', conf = 0.95,
                    boot_args = list(), boot.ci_args = list(), show_progress = TRUE) {
+  if (!is.null(mia_res$method) && mia_res$method == 'aipw'){
+    stop("Confidence intervals are not currently implemented for mia_aipw objects.",
+         call. = FALSE)
+  }
 
   # Error checking for misunderstandings about how arguments are passed into the boot and boot.ci functions
   if (length(type) > 1){
